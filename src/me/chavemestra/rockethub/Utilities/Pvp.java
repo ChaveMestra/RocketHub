@@ -65,6 +65,8 @@ public class Pvp implements Listener {
             p.getInventory().setArmorContents(new ItemStack[3]);
             p.getInventory().setItem(8, itemStock.sairModo(false, true));
             p.getInventory().setItem(0, new ItemStack(Material.DIAMOND_SWORD, 1));
+            p.getInventory().setItem(1, new ItemStack(Material.BOW, 1));
+            p.getInventory().setItem(2, new ItemStack(Material.ARROW, 64));
             
             return true;
         }
