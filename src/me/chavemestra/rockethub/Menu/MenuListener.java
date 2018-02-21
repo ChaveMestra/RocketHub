@@ -7,7 +7,6 @@ package me.chavemestra.rockethub.Menu;
 
 import java.sql.SQLException;
 import static me.chavemestra.rockethub.RocketHub.itemStock;
-import static me.chavemestra.rockethub.RocketHub.lobby;
 import static me.chavemestra.rockethub.RocketHub.menus;
 import static me.chavemestra.rockethub.RocketHub.parkour;
 import static me.chavemestra.rockethub.RocketHub.pvp;
