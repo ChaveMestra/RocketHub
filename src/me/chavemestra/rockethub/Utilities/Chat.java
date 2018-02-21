@@ -6,6 +6,7 @@
 package me.chavemestra.rockethub.Utilities;
 
 import java.util.HashMap;
+import static me.chavemestra.rockethub.RocketHub.utilidades;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,9 +29,7 @@ public class Chat implements Listener {
     }
     
       
-    public String getGrupo(Player p) {
-        return PermissionsEx.getUser(p).getGroups()[0].getPrefix();
-    }
+    
 
     public boolean podeChat(Player p) {
         String uuid = p.getUniqueId().toString();
@@ -64,7 +63,7 @@ public class Chat implements Listener {
             e.setCancelled(true);
             return;
         }
-        e.setFormat(f(getGrupo(e.getPlayer()) + " " + e.getPlayer().getName() + "&f: &7") + e.getMessage());
+        e.setFormat(f(utilidades.getGrupo(e.getPlayer()) + e.getPlayer().getName() + "&f: &7") + e.getMessage());
 
     }
 }

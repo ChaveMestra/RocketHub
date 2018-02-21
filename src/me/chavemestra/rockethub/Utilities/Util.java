@@ -7,9 +7,16 @@ package me.chavemestra.rockethub.Utilities;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import static me.chavemestra.rockethub.RocketHub.itemStock;
 import static me.chavemestra.rockethub.RocketHub.plugin;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
+import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 /**
  *
@@ -66,6 +73,43 @@ public class Util {
         dataOutput.writeUTF(serverInString);
         player.sendPluginMessage(plugin, "BungeeCord", dataOutput.toByteArray());
     }
+
+    public void setupJoin(Player p) {
+        p.getInventory().clear();
+        p.getEquipment().setHelmet(itemStock.capacete());
+        p.getInventory().setItem(0, itemStock.compass());
+        p.getInventory().setItem(4, itemStock.infos());
+        //PVPp.getInventory().setItem(8, lobby());
+        porArmadura(p);
+        p.setGameMode(GameMode.ADVENTURE);
+
+    }
+    public String getGrupo(Player p) {
+        String prefixo = PermissionsEx.getUser(p).getGroups()[0].getPrefix();
+        if (prefixo.length() >= 1) {
+            return prefixo+" ";
+        }
+        return prefixo;
+    }
     
-    
+    public void porArmadura(Player p) {
+        ItemStack lchest = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
+        LeatherArmorMeta lch = (LeatherArmorMeta) lchest.getItemMeta();
+        lch.setColor(Color.fromRGB(255, 255, 255));
+        lchest.setItemMeta(lch);
+        p.getEquipment().setChestplate(lchest);
+
+        ItemStack lboots = new ItemStack(Material.LEATHER_BOOTS, 1);
+        LeatherArmorMeta lch3 = (LeatherArmorMeta) lboots.getItemMeta();
+        lch3.setColor(Color.fromRGB(255, 255, 255));
+        lboots.setItemMeta(lch3);
+        p.getEquipment().setBoots(lboots);
+
+        ItemStack lleg = new ItemStack(Material.LEATHER_LEGGINGS, 1);
+        LeatherArmorMeta lch4 = (LeatherArmorMeta) lleg.getItemMeta();
+        lch4.setColor(Color.fromRGB(255, 255, 255));
+        lleg.setItemMeta(lch4);
+        p.getEquipment().setLeggings(lleg);
+    }
+
 }

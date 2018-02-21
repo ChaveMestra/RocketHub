@@ -14,6 +14,8 @@ import java.util.HashMap;
 import me.chavemestra.rockethub.Setup.Setup;
 import me.chavemestra.rockethub.Menu.ItemStock;
 import me.chavemestra.rockethub.Menu.Menus;
+import me.chavemestra.rockethub.Utilities.Parkour;
+import me.chavemestra.rockethub.Utilities.Pvp;
 import me.chavemestra.rockethub.Utilities.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -71,12 +73,16 @@ public class RocketHub extends JavaPlugin{
     public static Menus menus;
     public static Util utilidades;
     public static Plugin plugin;
+    public static Pvp pvp;
+    public static Parkour parkour;
 
     @Override
     public void onEnable() {
         plugin = this;
-        Setup.registerListeners(this);
+        //tem q instanciar antes pra registrar o listener que for instanciado dps
         Setup.instanceObjects(this);
+        Setup.registerListeners(this);
+        
         this.getServer().getMessenger().registerOutgoingPluginChannel((Plugin) this, "BungeeCord");
         new BukkitRunnable() {
             @Override

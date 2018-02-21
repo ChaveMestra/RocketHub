@@ -135,6 +135,46 @@ public class ItemStock {
 
     }
 
+    public ItemStack sairModo(boolean parkour, boolean pvp) {
+
+        ItemStack item = new ItemStack(Material.BARRIER, 1);
+        ItemMeta meta = item.getItemMeta();
+        if (parkour) {
+            meta.setDisplayName(f("&cSair do Parkour &7(Clique Direito)"));
+        } else if (pvp) {
+            meta.setDisplayName(f("&cSair do PVP &7(Clique Direito)"));
+        }
+        ArrayList lore = new ArrayList();
+        lore.add(f("&7Clique com o botao direito para entrar no modo!"));
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        return item;
+
+    }
+
+    public ItemStack entrarModo(boolean parkour, boolean pvp) {
+
+        ItemStack item;
+        if (parkour) {
+            item = new ItemStack(Material.LEATHER_BOOTS, 1);
+        } else {
+            item = new ItemStack(Material.GOLDEN_APPLE, 1);
+        }
+
+        ItemMeta meta = item.getItemMeta();
+        if (parkour) {
+            meta.setDisplayName(f("&aEntrar no Parkour &7(Clique Direito)"));
+        } else if (pvp) {
+            meta.setDisplayName(f("&aEntrar em Modo PVP &7(Clique Direito)"));
+        }
+        ArrayList lore = new ArrayList();
+        lore.add(f("&7Clique com o botao direito para entrar no modo!"));
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        return item;
+
+    }
+
     public ItemStack HUB(int i) {
         ItemStack item = new ItemStack(Material.BEACON, 1);
         ItemMeta meta = item.getItemMeta();
