@@ -16,6 +16,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -56,6 +57,10 @@ public class Protection implements Listener {
         }
     }
 
+    @EventHandler
+    public void onHit(ProjectileHitEvent e) {
+        e.getEntity().remove();
+    }
     @EventHandler
     public void comando(PlayerCommandPreprocessEvent e) {
         if (e.getPlayer().hasPermission("rocket.staff")) {
