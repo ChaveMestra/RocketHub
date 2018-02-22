@@ -35,6 +35,7 @@ public class JoinHandle implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         e.setJoinMessage(null);
+        utilidades.setupJoin(e.getPlayer());
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             setHeaderAndFooter(e.getPlayer());
             e.getPlayer().teleport(lobby);
@@ -46,12 +47,14 @@ public class JoinHandle implements Listener {
         TabAPI.setHeader(player,
                 " ",
                 "§6§lRocket§e§lMC",
+                "§ejogar.rocketmc.com.br",
                 " ");
         
         TabAPI.setFooter(player,
                 " ",
                 "   §6§lSITE: §ewww.rocketmc.com.br",
-                " ");
+                " ",
+                "   §6§lLoja: §e/cash");
     }
     
     public void mensagemJoin(Player p) {

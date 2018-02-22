@@ -11,6 +11,7 @@ import static me.chavemestra.rockethub.Log.LogUtil.log;
 import static me.chavemestra.rockethub.Utilities.Chat.f;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -37,6 +38,50 @@ public class ItemStock {
         meta.setLore(lore);
         stack.setItemMeta(meta);
         return stack;
+    }
+
+    public ItemStack[] armaduraPvp() {
+        ItemStack[] itens = new ItemStack[4];
+        ItemStack peito = new ItemStack(Material.DIAMOND_CHESTPLATE);
+        ItemStack helmo = new ItemStack(Material.DIAMOND_HELMET);
+        ItemStack calca = new ItemStack(Material.DIAMOND_LEGGINGS);
+        ItemStack bota = new ItemStack(Material.DIAMOND_BOOTS);
+        itens[0] = setPvpMeta(peito);
+        itens[1] = setPvpMeta(helmo);
+        itens[2] = setPvpMeta(calca);
+        itens[3] = setPvpMeta(bota);
+        for (ItemStack it : itens) {
+            it.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+            it.addEnchantment(Enchantment.DURABILITY, 3);
+        }
+        return itens;
+    }
+
+    public ItemStack[] armasPvp() {
+        ItemStack[] itens = new ItemStack[4];
+        ItemStack arma = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack bow = new ItemStack(Material.BOW);
+        ItemStack flecha = new ItemStack(Material.ARROW);
+        ItemStack cap = new ItemStack(Material.GOLDEN_APPLE, 1, (byte) 1);
+        arma.addEnchantment(Enchantment.DAMAGE_ALL, 5);
+        arma.addEnchantment(Enchantment.FIRE_ASPECT, 2);
+        arma.addEnchantment(Enchantment.DURABILITY, 3);
+        bow.addEnchantment(Enchantment.DURABILITY, 3);
+        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 5);
+        bow.addEnchantment(Enchantment.ARROW_FIRE, 2);
+        bow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
+        itens[0] = setPvpMeta(arma);
+        itens[1] = setPvpMeta(bow);
+        itens[2] = setPvpMeta(flecha);
+        itens[3] = setPvpMeta(cap);
+        return itens;
+    }
+
+    public ItemStack setPvpMeta(ItemStack item) {
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(f("&6&lPVP"));
+        item.setItemMeta(meta);
+        return item;
     }
 
     public ItemStack compass() {

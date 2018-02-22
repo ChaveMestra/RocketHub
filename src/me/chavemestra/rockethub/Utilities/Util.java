@@ -79,19 +79,21 @@ public class Util {
         p.getEquipment().setHelmet(itemStock.capacete());
         p.getInventory().setItem(0, itemStock.compass());
         p.getInventory().setItem(4, itemStock.infos());
-        //PVPp.getInventory().setItem(8, lobby());
+        p.getInventory().setItem(6, itemStock.entrarModo(false, true));
+        p.getInventory().setItem(7, itemStock.entrarModo(true, false));
         porArmadura(p);
         p.setGameMode(GameMode.ADVENTURE);
 
     }
+
     public String getGrupo(Player p) {
         String prefixo = PermissionsEx.getUser(p).getGroups()[0].getPrefix();
         if (prefixo.length() >= 1) {
-            return prefixo+" ";
+            return prefixo + " ";
         }
         return prefixo;
     }
-    
+
     public void porArmadura(Player p) {
         ItemStack lchest = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
         LeatherArmorMeta lch = (LeatherArmorMeta) lchest.getItemMeta();
