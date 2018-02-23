@@ -12,6 +12,7 @@ import static me.chavemestra.rockethub.RocketHub.itemStock;
 import static me.chavemestra.rockethub.RocketHub.utilidades;
 import static me.chavemestra.rockethub.Utilities.Chat.f;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Statistic;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
@@ -31,6 +32,7 @@ public class Parkour implements Listener {
     public Parkour() {
         parkour = new HashMap();
     }
+
     public boolean emParkour(Player p) {
         return parkour.containsKey(p.getUniqueId());
     }
@@ -42,7 +44,8 @@ public class Parkour implements Listener {
             parkour.put(p.getUniqueId(), System.currentTimeMillis() / 1000);
             p.getInventory().clear();
             p.getInventory().setItem(8, itemStock.sairModo(true, false));
-            
+            p.teleport(new Location(Bukkit.getWorld("Lobby"), -7, 38, 13, -64, -5));
+
             for (Player playerOn : Bukkit.getOnlinePlayers()) {
                 p.hidePlayer(playerOn);
             }
@@ -64,6 +67,7 @@ public class Parkour implements Listener {
             parkour.remove(p.getUniqueId());
             //tiro da lista dps de todo processo pra evitar bugs cabulosos
             p.sendMessage(f("&2&l[&aParkour&2&l] &eVoce saiu do Parkour!"));
+            p.teleport(p.getWorld().getSpawnLocation());
             utilidades.setupJoin(p);
             return true;
         }
@@ -74,9 +78,12 @@ public class Parkour implements Listener {
         Long tempoHash = parkour.get(p.getUniqueId());
         DecimalFormat df = new DecimalFormat("0.00");
         int tempo = (int) (System.currentTimeMillis() / 1000 - tempoHash);
-        if (p.getStatistic(Statistic.TRADED_WITH_VILLAGER) > tempo) {
+        if (p.getStatistic(Statistic.TRADED_WITH_VILLAGER) == 0) {
             p.setStatistic(Statistic.TRADED_WITH_VILLAGER, tempo);
-            p.sendMessage("&2&l[&aParkour&2&l] &eSeu novo recorde é de &b" + df.format(tempo) + " segundos");
+            p.sendMessage(f("&2&l[&aParkour&2&l] &eSeu novo recorde é de &b" + df.format(tempo) + " segundos"));
+        } else if (p.getStatistic(Statistic.TRADED_WITH_VILLAGER) > tempo) {
+            p.setStatistic(Statistic.TRADED_WITH_VILLAGER, tempo);
+            p.sendMessage(f("&2&l[&aParkour&2&l] &eSeu novo recorde é de &b" + df.format(tempo) + " segundos"));
         }
         Bukkit.broadcastMessage(f("&2&l[&aParkour&2&l] &eO jogador " + utilidades.getGrupo(p) + "&f" + p.getName() + ""
                 + "&e venceu o Parkour em &b" + df.format(tempo) + " segundos"));
@@ -98,6 +105,5 @@ public class Parkour implements Listener {
             }
         }
     }
-    
-  
+
 }

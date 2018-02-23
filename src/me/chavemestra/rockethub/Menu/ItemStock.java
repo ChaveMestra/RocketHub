@@ -51,8 +51,8 @@ public class ItemStock {
         itens[2] = setPvpMeta(calca);
         itens[3] = setPvpMeta(bota);
         for (ItemStack it : itens) {
-            it.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
-            it.addEnchantment(Enchantment.DURABILITY, 3);
+            it.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+            it.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
         }
         return itens;
     }
@@ -63,13 +63,13 @@ public class ItemStock {
         ItemStack bow = new ItemStack(Material.BOW);
         ItemStack flecha = new ItemStack(Material.ARROW);
         ItemStack cap = new ItemStack(Material.GOLDEN_APPLE, 1, (byte) 1);
-        arma.addEnchantment(Enchantment.DAMAGE_ALL, 5);
-        arma.addEnchantment(Enchantment.FIRE_ASPECT, 2);
-        arma.addEnchantment(Enchantment.DURABILITY, 3);
-        bow.addEnchantment(Enchantment.DURABILITY, 3);
-        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 5);
-        bow.addEnchantment(Enchantment.ARROW_FIRE, 2);
-        bow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
+        arma.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);
+        arma.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 2);
+        arma.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
+        bow.addUnsafeEnchantment(Enchantment.DURABILITY, 3);
+        bow.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 5);
+        bow.addUnsafeEnchantment(Enchantment.ARROW_FIRE, 2);
+        bow.addUnsafeEnchantment(Enchantment.ARROW_INFINITE, 1);
         itens[0] = setPvpMeta(arma);
         itens[1] = setPvpMeta(bow);
         itens[2] = setPvpMeta(flecha);
