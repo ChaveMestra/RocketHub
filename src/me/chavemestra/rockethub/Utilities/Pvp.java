@@ -56,7 +56,10 @@ public class Pvp implements Listener {
     }
 
     public void setarItensPvp(Player p) {
-        p.getInventory().setArmorContents(itemStock.armaduraPvp());
+        p.getInventory().setChestplate(itemStock.armaduraPvp()[0]);
+        p.getInventory().setHelmet(itemStock.armaduraPvp()[1]);
+        p.getInventory().setLeggings(itemStock.armaduraPvp()[2]);
+        p.getInventory().setBoots(itemStock.armaduraPvp()[3]);
         p.getInventory().addItem(itemStock.armasPvp());
     }
 
