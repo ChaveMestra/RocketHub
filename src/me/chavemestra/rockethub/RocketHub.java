@@ -5,9 +5,11 @@
  */
 package me.chavemestra.rockethub;
 
+import me.chavemestra.rockethub.Database.DBManager;
 import me.chavemestra.rockethub.Menu.ItemStock;
 import me.chavemestra.rockethub.Menu.Menus;
 import me.chavemestra.rockethub.Setup.Setup;
+import me.chavemestra.rockethub.Utilities.Holos;
 import me.chavemestra.rockethub.Utilities.Parkour;
 import me.chavemestra.rockethub.Utilities.Pvp;
 import me.chavemestra.rockethub.Utilities.Util;
@@ -30,6 +32,8 @@ public class RocketHub extends JavaPlugin{
     public static Plugin plugin;
     public static Pvp pvp;
     public static Parkour parkour;
+    public static DBManager dbManager;
+    public static Holos holos;
 
     @Override
     public void onEnable() {
@@ -44,6 +48,7 @@ public class RocketHub extends JavaPlugin{
             public void run() {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stoplag");
                 lobby = new Location(Bukkit.getWorld("Lobby"), -21.500, 39, 9.500, -90, 1);
+                holos = new Holos(RocketHub.this);
             }
         }.runTaskLater(this, 50L);
     }

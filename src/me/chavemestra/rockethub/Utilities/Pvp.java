@@ -5,9 +5,11 @@
  */
 package me.chavemestra.rockethub.Utilities;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
+import static me.chavemestra.rockethub.RocketHub.dbManager;
 import static me.chavemestra.rockethub.RocketHub.itemStock;
 import static me.chavemestra.rockethub.RocketHub.lobby;
 import static me.chavemestra.rockethub.RocketHub.utilidades;
@@ -93,8 +95,9 @@ public class Pvp implements Listener {
         return false;
     }
 
-    public void morreu(Player p, Player matador) {
+    public void morreu(Player p, Player matador) throws SQLException {
         saiuPvp(p);
+        dbManager.increaseKills(matador.getUniqueId().toString());
         p.teleport(lobby);
         p.setHealth(20);
         p.sendMessage(f("&cVoce morreu.."));
@@ -105,7 +108,7 @@ public class Pvp implements Listener {
 
     //handle de hits
     @EventHandler
-    public void onHit(EntityDamageByEntityEvent e) {
+    public void onHit(EntityDamageByEntityEvent e) throws SQLException {
         if (e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
             Player atacante = (Player) e.getDamager();
             Player vitima = (Player) e.getEntity();

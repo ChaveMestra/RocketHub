@@ -5,6 +5,7 @@
  */
 package me.chavemestra.rockethub.Setup;
 
+import me.chavemestra.rockethub.Database.DBManager;
 import me.chavemestra.rockethub.Log.LogUtil.TipoLog;
 import static me.chavemestra.rockethub.Log.LogUtil.log;
 import me.chavemestra.rockethub.Menu.ItemStock;
@@ -39,6 +40,7 @@ public class Setup {
     
     public static void instanceObjects(Plugin p) {
         log("Instanciando objetos..", TipoLog.Inicializacao);
+        RocketHub.dbManager = new DBManager();
         RocketHub.itemStock = new ItemStock();
         RocketHub.menus = new Menus();
         RocketHub.utilidades = new Util();

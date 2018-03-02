@@ -5,9 +5,11 @@
  */
 package me.chavemestra.rockethub.Utilities;
 
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.UUID;
+import static me.chavemestra.rockethub.RocketHub.dbManager;
 import static me.chavemestra.rockethub.RocketHub.itemStock;
 import static me.chavemestra.rockethub.RocketHub.utilidades;
 import static me.chavemestra.rockethub.Utilities.Chat.f;
@@ -74,15 +76,15 @@ public class Parkour implements Listener {
         return false;
     }
 
-    public void ganhouParkour(Player p) {
+    public void ganhouParkour(Player p) throws SQLException {
         Long tempoHash = parkour.get(p.getUniqueId());
         DecimalFormat df = new DecimalFormat("0.00");
         int tempo = (int) (System.currentTimeMillis() / 1000 - tempoHash);
         if (p.getStatistic(Statistic.TRADED_WITH_VILLAGER) == 0) {
-            p.setStatistic(Statistic.TRADED_WITH_VILLAGER, tempo);
+            dbManager.executeUpdateValue("tempoParkour", tempo, "UUID", p.getUniqueId().toString());
             p.sendMessage(f("&2&l[&aParkour&2&l] &eSeu novo recorde é de &b" + df.format(tempo) + " segundos"));
         } else if (p.getStatistic(Statistic.TRADED_WITH_VILLAGER) > tempo) {
-            p.setStatistic(Statistic.TRADED_WITH_VILLAGER, tempo);
+            dbManager.executeUpdateValue("tempoParkour", tempo, "UUID", p.getUniqueId().toString());
             p.sendMessage(f("&2&l[&aParkour&2&l] &eSeu novo recorde é de &b" + df.format(tempo) + " segundos"));
         }
         Bukkit.broadcastMessage(f("&2&l[&aParkour&2&l] &eO jogador " + utilidades.getGrupo(p) + "&f" + p.getName() + ""
@@ -91,7 +93,7 @@ public class Parkour implements Listener {
     }
 
     @EventHandler
-    public void onPlaca(PlayerInteractEvent e) {
+    public void onPlaca(PlayerInteractEvent e) throws SQLException {
         Player p = (Player) e.getPlayer();
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (e.getClickedBlock().getState() instanceof Sign) {

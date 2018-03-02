@@ -5,6 +5,8 @@
  */
 package me.chavemestra.rockethub.Utilities;
 
+import java.sql.SQLException;
+import static me.chavemestra.rockethub.RocketHub.dbManager;
 import static me.chavemestra.rockethub.RocketHub.lobby;
 import static me.chavemestra.rockethub.RocketHub.plugin;
 import static me.chavemestra.rockethub.RocketHub.utilidades;
@@ -33,8 +35,11 @@ public class JoinHandle implements Listener {
     }
     
     @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
+    public void onJoin(PlayerJoinEvent e) throws SQLException {
         e.setJoinMessage(null);
+        if (dbManager.executeQuery("name", "UUID", e.getPlayer().getUniqueId().toString()).getString("name") != null) {
+            dbManager.inserirPlayer(e.getPlayer());
+        }
         utilidades.setupJoin(e.getPlayer());
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             setHeaderAndFooter(e.getPlayer());
