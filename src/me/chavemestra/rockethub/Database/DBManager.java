@@ -34,7 +34,7 @@ public class DBManager {
                 + "='" + valor + "' WHERE " + where + "='" + verify + "'");
     }
 
-    public void executeUpdateValue(String coluna, int valor, String where, String verify) throws SQLException {
+    public void executeUpdateValue(String coluna, double valor, String where, String verify) throws SQLException {
         db.rpgConnection().createStatement().executeUpdate("UPDATE Rocket_Hub SET " + coluna + ""
                 + "=" + valor + " WHERE " + where + "='" + verify + "'");
     }

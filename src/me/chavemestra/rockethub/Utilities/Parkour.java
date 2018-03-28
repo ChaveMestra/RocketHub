@@ -5,12 +5,14 @@
  */
 package me.chavemestra.rockethub.Utilities;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.UUID;
 import static me.chavemestra.rockethub.RocketHub.dbManager;
 import static me.chavemestra.rockethub.RocketHub.itemStock;
+import static me.chavemestra.rockethub.RocketHub.lobby;
 import static me.chavemestra.rockethub.RocketHub.utilidades;
 import static me.chavemestra.rockethub.Utilities.Chat.f;
 import org.bukkit.Bukkit;
@@ -69,7 +71,7 @@ public class Parkour implements Listener {
             parkour.remove(p.getUniqueId());
             //tiro da lista dps de todo processo pra evitar bugs cabulosos
             p.sendMessage(f("&2&l[&aParkour&2&l] &eVoce saiu do Parkour!"));
-            p.teleport(p.getWorld().getSpawnLocation());
+            p.teleport(lobby);
             utilidades.setupJoin(p);
             return true;
         }
@@ -78,18 +80,22 @@ public class Parkour implements Listener {
 
     public void ganhouParkour(Player p) throws SQLException {
         Long tempoHash = parkour.get(p.getUniqueId());
-        DecimalFormat df = new DecimalFormat("0.00");
-        int tempo = (int) (System.currentTimeMillis() / 1000 - tempoHash);
-        if (p.getStatistic(Statistic.TRADED_WITH_VILLAGER) == 0) {
-            dbManager.executeUpdateValue("tempoParkour", tempo, "UUID", p.getUniqueId().toString());
+        DecimalFormat df = new DecimalFormat("0.000");
+        ResultSet rs = dbManager.executeQuery("tempoParkour", "UUID", p.getUniqueId().toString());
+        if (rs.next()) {
+        double tempoDb = rs.getDouble("tempoParkour");
+        double tempo = (System.currentTimeMillis() / 1000.0 - tempoHash);
+        if (tempoDb == 0) {
+           dbManager.executeUpdateValue("tempoParkour", Double.parseDouble(df.format(tempo)), "UUID", p.getUniqueId().toString());
             p.sendMessage(f("&2&l[&aParkour&2&l] &eSeu novo recorde é de &b" + df.format(tempo) + " segundos"));
-        } else if (p.getStatistic(Statistic.TRADED_WITH_VILLAGER) > tempo) {
-            dbManager.executeUpdateValue("tempoParkour", tempo, "UUID", p.getUniqueId().toString());
+        } else if (tempoDb > tempo) {
+           dbManager.executeUpdateValue("tempoParkour", Double.parseDouble(df.format(tempo)), "UUID", p.getUniqueId().toString());
             p.sendMessage(f("&2&l[&aParkour&2&l] &eSeu novo recorde é de &b" + df.format(tempo) + " segundos"));
         }
         Bukkit.broadcastMessage(f("&2&l[&aParkour&2&l] &eO jogador " + utilidades.getGrupo(p) + "&f" + p.getName() + ""
                 + "&e venceu o Parkour em &b" + df.format(tempo) + " segundos"));
         saiuParkour(p);
+        }
     }
 
     @EventHandler

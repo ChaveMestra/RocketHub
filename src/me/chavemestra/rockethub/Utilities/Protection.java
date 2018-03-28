@@ -38,14 +38,16 @@ public class Protection implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageEvent e) {
-        e.setCancelled(true);
         if (e.getEntity() instanceof Player) {
             if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
                 Player p = (Player) e.getEntity();
                 p.teleport(lobby);
             }
-            if (e.getCause() != DamageCause.ENTITY_ATTACK && e.getCause() != DamageCause.PROJECTILE) {
-                e.setCancelled(true);
+            if (e.getCause() == DamageCause.SUFFOCATION || e.getCause() == DamageCause.FALL
+                    || e.getCause() == DamageCause.STARVATION
+                    || e.getCause() == DamageCause.DROWNING
+                    || e.getCause() == DamageCause.LAVA) {
+              e.setCancelled(true);
             }
         }
     }

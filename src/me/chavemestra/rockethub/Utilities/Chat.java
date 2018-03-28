@@ -7,6 +7,7 @@ package me.chavemestra.rockethub.Utilities;
 
 import java.util.HashMap;
 import static me.chavemestra.rockethub.RocketHub.utilidades;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -63,6 +64,5 @@ public class Chat implements Listener {
             return;
         }
         e.setFormat(f(utilidades.getGrupo(e.getPlayer()) + e.getPlayer().getName() + "&f: &7") + e.getMessage());
-
     }
 }

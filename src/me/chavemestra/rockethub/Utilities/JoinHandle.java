@@ -37,7 +37,7 @@ public class JoinHandle implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) throws SQLException {
         e.setJoinMessage(null);
-        if (dbManager.executeQuery("name", "UUID", e.getPlayer().getUniqueId().toString()).getString("name") != null) {
+        if (!dbManager.executeQuery("name", "UUID", e.getPlayer().getUniqueId().toString()).next()) {
             dbManager.inserirPlayer(e.getPlayer());
         }
         utilidades.setupJoin(e.getPlayer());

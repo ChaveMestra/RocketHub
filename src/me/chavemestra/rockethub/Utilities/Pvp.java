@@ -29,7 +29,7 @@ import org.bukkit.inventory.ItemStack;
  */
 public class Pvp implements Listener {
 
-    public static ArrayList<UUID> pvp;
+    public static ArrayList<String> pvp;
     public static HashMap<String, Long> pvpCooldown;
 
     public Pvp() {
@@ -38,7 +38,7 @@ public class Pvp implements Listener {
     }
 
     public boolean emPvp(Player p) {
-        return pvp.contains(p.getUniqueId());
+        return pvp.contains(p.getUniqueId().toString());
     }
 
     public boolean podePvp(Player p) {
@@ -68,7 +68,7 @@ public class Pvp implements Listener {
     public boolean colocaPvp(Player p) {
         if (!emPvp(p) && podePvp(p)) {
             //coloco na lista antes pra evitar bugs sinistros
-            pvp.add(p.getUniqueId());
+            pvp.add(p.getUniqueId().toString());
             p.sendMessage(f("&6&l[&ePVP&6&l] &aVoce entrou em modo PVP! Voce agora pode matar quem também estiver neste modo!"));
             //coloca armadura e tausss
             p.getInventory().clear();
@@ -84,7 +84,8 @@ public class Pvp implements Listener {
     public boolean saiuPvp(Player p) {
         if (emPvp(p)) {
             p.getInventory().clear();
-            pvp.remove(p.getUniqueId());
+            p.setFireTicks(0);
+            pvp.remove(p.getUniqueId().toString());
             //tiro da lista dps de todo processo pra evitar bugs cabulosos
             utilidades.setupJoin(p);
             p.teleport(lobby);
@@ -113,11 +114,11 @@ public class Pvp implements Listener {
             Player atacante = (Player) e.getDamager();
             Player vitima = (Player) e.getEntity();
             if (!emPvp(atacante) || !emPvp(vitima)) {
-                e.setCancelled(true);
+               e.setCancelled(true);
             } else {
                 if (e.getFinalDamage() >= vitima.getHealth()) {
-                    e.setCancelled(true);
-                    morreu(vitima, atacante);
+                  e.setCancelled(true);
+                  morreu(vitima, atacante);
                 }
             }
         }

@@ -33,7 +33,7 @@ public class DBDefault {
                     + "(UUID varchar(100) primary key"
                     + ", name varchar(50)"
                     + ", kills int DEFAULT '0'"
-                    + ", tempoParkour int DEFAULT '0')");
+                    + ", tempoParkour double DEFAULT '0')");
 
            
 

@@ -28,7 +28,7 @@ public class MenuListener implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent e) throws SQLException {
-        if (!e.getPlayer().isOp() && !(e.getClickedBlock().getState() instanceof Sign)) {
+        if (!e.getPlayer().isOp() && e.getClickedBlock() != null && !(e.getClickedBlock().getState() instanceof Sign)) {
             e.setCancelled(true);
         }
         if (e.getAction().toString().contains("RIGHT")) {
