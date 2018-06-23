@@ -58,7 +58,7 @@ public class DBDefault {
                 getLogger().info("ERRO: Conexao ao banco de dados MySQL falhou!");
                 getLogger().log(Level.INFO, "ERRO: {0}", ex);
             }
-            this.connection = DriverManager.getConnection(endereco, "root", "rocketmc2018");
+            this.connection = DriverManager.getConnection(endereco, "root", "9xO8y2t8As4");
             return this.connection;
         } catch (ClassNotFoundException e) {
 

@@ -165,15 +165,38 @@ public class ItemStock {
 
     }
 
-    public ItemStack skywars() {
-        ItemStack item = new ItemStack(Material.BOW, 1);
+    public ItemStack rust() {
+        ItemStack item = new ItemStack(Material.BONE, 1);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(f("&aSkywars &e&l1.8 - 1.12"));
+        meta.setDisplayName(f("&aRust &e&l1.8.X"));
         ArrayList lore = new ArrayList();
-        lore.add(f("&7Batalhe nas nuvens em busca de honra!"));
-        lore.add(f("&7Compre kits, efeitos, caixas e lidere!"));
+        lore.add("");
+        lore.add(f("&e&l * &bSERVIDOR EM &LBETA"));
+        lore.add("");
+        lore.add(f("&7Colete recursos, construa sua base,"));
+        lore.add(f("&7invada seus inimigos e sobreviva neste"));
+        lore.add(f("&7mundo hostil devastado pela radiacao"));
         lore.add("");
         lore.add(f("&aClique para conectar "));
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        return item;
+
+    }
+
+    public ItemStack fullpvp() {
+        ItemStack item = new ItemStack(Material.DIAMOND_SWORD, 1);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(f("&cFull PVP &e&l1.8.X"));
+        ArrayList lore = new ArrayList();
+        lore.add("");
+        lore.add(f("&e&l * &bSERVIDOR EM &LBETA"));
+        lore.add("");
+        lore.add(f("&7Minere fragmentos, recolha a alma de"));
+        lore.add(f("&7seus inimigos, compre itens poderosos,"));
+        lore.add(f("&7domine o PVP nos eventos, conquiste!"));
+        lore.add("");
+        lore.add(f("&cEM BREVE "));
         meta.setLore(lore);
         item.setItemMeta(meta);
         return item;

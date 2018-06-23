@@ -56,7 +56,8 @@ public class Menus {
         inv.setItem(52, vidroLaranja);
 
         inv.setItem(21, itemStock.dayz());
-         inv.setItem(22, itemStock.skywars());
+         inv.setItem(30, itemStock.rust());
+          inv.setItem(32, itemStock.fullpvp());
         inv.setItem(23, itemStock.skyblock());
         inv.setItem(40, itemStock.restaurar());
         p.openInventory(inv);

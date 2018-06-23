@@ -87,9 +87,9 @@ public class MenuListener implements Listener {
             utilidades.sendPlayer((Player) e.getWhoClicked(), "Skyblock2");
             p.closeInventory();
         }
-        if (e.getClickedInventory() != null && e.getCurrentItem() != null && e.getCurrentItem().getType() == Material.BOW) {
+        if (e.getClickedInventory() != null && e.getCurrentItem() != null && e.getCurrentItem().getType() == Material.BONE) {
             Player p = (Player) e.getWhoClicked();
-            utilidades.sendPlayer((Player) e.getWhoClicked(), "Skywars");
+            utilidades.sendPlayer((Player) e.getWhoClicked(), "Rust");
             p.closeInventory();
         }
 
